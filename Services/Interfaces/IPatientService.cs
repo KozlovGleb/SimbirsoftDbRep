@@ -10,7 +10,7 @@ namespace SimbirsoftDbRep.Services
     /// <summary>
     /// Интерфейс сервиса для работы с данными о пациенте.
     /// </summary>
-    public interface IPatientService:ICrudService<PatietnDTO>
+    public interface IPatientService:ICrudService<PatientDTO>
     {
     }
 }

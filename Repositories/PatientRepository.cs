@@ -13,7 +13,7 @@ namespace SimbirsoftDbRep.Repositories
     /// <summary>
     /// Репозиторий для работы с сущностями "Пациент".
     /// </summary>
-    public class PatientRepository : BaseRepository<PatietnDTO, Patient>, IPatientRepositoty
+    public class PatientRepository : BaseRepository<PatientDTO, Patient>, IPatientRepositoty
     {
         /// <summary>
         /// Инициализирует экземпляр <see cref="DressRepository"/>.

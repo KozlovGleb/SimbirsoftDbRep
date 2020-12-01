@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SimbirsoftDbRep.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ public static class RepositoriesConfiguration
     /// <param name="services">Коллекция сервисов из Startup.</param>
     public static void ConfigureRepositories(this IServiceCollection services)
     {
-        services.AddTransient<IPatientRepository, PatientRepository>();
+        services.AddTransient<IPatientRepositoty, PatientRepository>();
     }
 }
 }

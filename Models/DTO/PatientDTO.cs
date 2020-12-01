@@ -8,7 +8,7 @@ namespace SimbirsoftDbRep.Models.DTO
     /// <summary>
     /// DTO для <see cref="Patient"/>
     /// </summary>
-    public class PatietnDTO : BaseDto
+    public class PatientDTO : BaseDto
     {
         /// <summary>
         /// Имя пациента.

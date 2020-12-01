@@ -11,7 +11,7 @@ namespace SimbirsoftDbRep.Repositories.Interfaces
     /// <summary>
     /// Интерфейс репозитория для работы с сущностями "Пациент".
     /// </summary>
-    public interface IPatientRepositoty: ICrudRepository<PatietnDTO, Patient>
+    public interface IPatientRepositoty: ICrudRepository<PatientDTO, Patient>
     {
     }
 }

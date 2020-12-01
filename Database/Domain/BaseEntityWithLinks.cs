@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimbirsoftDbRep.Database.Domain
-
+{ 
      /// <summary>
      /// Базовый класс для слабых сущностей.
      /// </summary>
