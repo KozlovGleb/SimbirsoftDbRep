@@ -9,7 +9,7 @@ namespace SimbirsoftDbRep.Database.Domain
     public class Doctor:BaseEntity
     {
         /// <summary>
-        /// Наименование.
+        /// Имя.
         /// </summary>
         [StringLength(250)]
         [Required]

@@ -16,7 +16,7 @@ namespace SimbirsoftDbRep.Repositories
     public class PatientRepository : BaseRepository<PatientDTO, Patient>, IPatientRepositoty
     {
         /// <summary>
-        /// Инициализирует экземпляр <see cref="DressRepository"/>.
+        /// Инициализирует экземпляр <see cref="PatientRepository"/>.
         /// </summary>
         /// <param name="context">Контекст данных.</param>
         /// <param name="mapper">Маппер.</param>

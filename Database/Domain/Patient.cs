@@ -9,13 +9,13 @@ namespace SimbirsoftDbRep.Database.Domain
     public class Patient : BaseEntity
     {
         /// <summary>
-        /// Артикул.
+        /// Имя.
         /// </summary>
         [StringLength(20)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Описание.
+        /// Телефонный номер.
         /// </summary>
         [StringLength(2500)]
         public string PhoneNumber { get; set; }
