@@ -43,8 +43,6 @@ D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\NSwag.AspNetCore.dll
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\NSwag.Core.dll
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\NSwag.Generation.dll
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\NSwag.Generation.AspNetCore.dll
-D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\Common\appsettings.Development.json
-D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\Common\appsettings.json
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\SimbirsoftDbRep.deps.json
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\SimbirsoftDbRep.runtimeconfig.json
 D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\SimbirsoftDbRep.runtimeconfig.dev.json
@@ -57,3 +55,5 @@ D:\projects\SimbirsoftDbRep\obj\Debug\netcoreapp3.1\SimbirsoftDbRep.MvcApplicati
 D:\projects\SimbirsoftDbRep\obj\Debug\netcoreapp3.1\SimbirsoftDbRep.dll
 D:\projects\SimbirsoftDbRep\obj\Debug\netcoreapp3.1\SimbirsoftDbRep.pdb
 D:\projects\SimbirsoftDbRep\obj\Debug\netcoreapp3.1\SimbirsoftDbRep.genruntimeconfig.cache
+D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\projects\SimbirsoftDbRep\bin\Debug\netcoreapp3.1\appsettings.json

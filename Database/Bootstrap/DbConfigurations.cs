@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace SimbirsoftDbRep.Database.Bootstrap
 {
+    /// <summary>
+    /// Конфигурации БД.
+    /// </summary>
     public static class DbConfigurations
     {
+        /// <summary>
+        /// Подключение DbContext.
+        /// </summary>
+        /// <param name="services">Коллекция сервисов.</param>
+        /// <param name="configuration">Конфигурация.</param>
         public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<HospitalContext>(

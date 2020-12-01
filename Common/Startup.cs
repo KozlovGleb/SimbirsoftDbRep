@@ -39,10 +39,11 @@ namespace SimbirsoftDbRep
         /// Конфигурация.
         /// </summary>
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var cn = Configuration.GetConnectionString("HospitalContext");
             services.ConfigureDb(Configuration);
             services.AddControllers();
             services.ConfigureRepositories();
@@ -61,6 +62,7 @@ namespace SimbirsoftDbRep
         /// <param name="env">Информация об окружении, в котором работает приложение.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            bool a = env.IsDevelopment();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

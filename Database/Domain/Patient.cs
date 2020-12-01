@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimbirsoftDbRep.Database.Domain
 {
-    public class Patient:BaseEntity
+    public class Patient : BaseEntity
     {
         /// <summary>
         /// Артикул.
@@ -20,11 +20,5 @@ namespace SimbirsoftDbRep.Database.Domain
         [StringLength(2500)]
         public string PhoneNumber { get; set; }
 
-        /// <summary>
-        /// Минимальный размер.
-        /// </summary>
-        [Required]
-        public PatientCard PatientCard { get; set; }
-        public long PatientCardId { get; set; }
     }
 }
