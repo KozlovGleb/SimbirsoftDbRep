@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SimbirsoftDbRep.Common.Swagger;
 using SimbirsoftDbRep.Models.DTO;
 using SimbirsoftDbRep.Models.Requests;
 using SimbirsoftDbRep.Models.Responses.Patient;

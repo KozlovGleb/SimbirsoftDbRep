@@ -30,6 +30,7 @@ namespace SimbirsoftDbRep.Database.Context
         /// <param name="options">Опции для конфигурации контекста.</param>
         public HospitalContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
        
