@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace SimbirsoftDbRep.Services
 {
-  public  interface IPatientService:ICrudService<PatietnDTO>
+    /// <summary>
+    /// Интерфейс сервиса для работы с данными о пациенте.
+    /// </summary>
+    public interface IPatientService:ICrudService<PatietnDTO>
     {
     }
 }
