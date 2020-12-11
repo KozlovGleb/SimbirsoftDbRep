@@ -22,13 +22,13 @@ namespace SimbirsoftDbRep.Database.Domain
         [Required]
         public string DateOfVisit { get; set; }
 
-        public Doctor Doctor { get; set; }
+        //public Doctor Doctor { get; set; }
 
         /// <summary>
         /// ID доктора.
         /// </summary>
         public long DoctorId { get; set; }
-        public Patient Patient { get; set; }
+        //public Patient Patient { get; set; }
 
         /// <summary>
         /// ID пациента.

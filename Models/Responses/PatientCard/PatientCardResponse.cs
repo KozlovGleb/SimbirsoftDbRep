@@ -1,14 +1,15 @@
-﻿using SimbirsoftDbRep.Database.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using SimbirsoftDbRep.Database.Domain;
 
-namespace SimbirsoftDbRep.Models.DTO
+namespace SimbirsoftDbRep.Models.Responses.PatientCard
 {
-    public class PatientCardDto:BaseDto
+    public class PatientCardResponse
     {
+
         /// <summary>
         /// Название болезни.
         /// </summary>
@@ -23,9 +24,17 @@ namespace SimbirsoftDbRep.Models.DTO
         [Required]
         public string DateOfVisit { get; set; }
 
-        public long DoctorId { get; set; }
+       // public Database.Domain.Doctor Doctor { get; set; }
 
-  
+        /// <summary>
+        /// ID доктора.
+        /// </summary>
+        public long DoctorId { get; set; }
+        //public Database.Domain.Patient Patient { get; set; }
+
+        /// <summary>
+        /// ID пациента.
+        /// </summary>
         public long PatientId { get; set; }
     }
 }

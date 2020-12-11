@@ -82,8 +82,17 @@ namespace SimbirsoftDbRep.Controllers
         {
             _logger.LogInformation("Patients/Post was requested.");
             // var response = await _patientService.CreateAsync(_mapper.Map<PatientDTO>(request));
-            var response = await unitOfWork.Patients.CreateAsync(_mapper.Map<PatientDTO>(request));
-            return Ok(_mapper.Map<PatientResponse>(response));
+            using (unitOfWork)
+            {
+               var response = await unitOfWork.Patients.CreateAsync(_mapper.Map<PatientDTO>(request));
+                unitOfWork.Save();
+                return Ok(_mapper.Map<PatientResponse>(response));
+                //var response = await unitOfWork.Patients.CreateAsync(_mapper.Map<PatientDTO>(request));
+                //unitOfWork.Save();
+                //return Ok(_mapper.Map<PatientResponse>(response));      
+            }
+             
+            
         }
 
         /// <summary>

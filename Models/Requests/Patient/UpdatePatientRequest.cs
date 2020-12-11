@@ -16,5 +16,16 @@ namespace SimbirsoftDbRep.Models.Requests
         /// </summary>
         [Required]
         public long Id { get; set; }
+        /// <summary>
+        /// Имя пациента.
+        /// </summary>
+        [Required]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Номер телефона пациента.
+        /// </summary>
+        [MaxLength(2000)]
+        public string PhoneNumber { get; set; }
     }
 }

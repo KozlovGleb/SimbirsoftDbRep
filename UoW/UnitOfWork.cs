@@ -21,39 +21,35 @@ namespace SimbirsoftDbRep.UoW
             _context = context;
             _mapper = mapper;
         }
-        public PatientRepository Patients
+        public PatientRepository Patients => patientRepository ?? (patientRepository = new PatientRepository(_context,_mapper));
+        public DoctorRepository Doctors => doctorRepository ?? (doctorRepository = new DoctorRepository(_context, _mapper));
+        public PatientCardRepository PatientCards => patientCardRepository ?? (patientCardRepository = new PatientCardRepository(_context, _mapper));
+
+
+       
+        public bool Save()
         {
-            get
+            bool returnValue = true;
+            using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
-                if (patientRepository == null)
-                    patientRepository = new PatientRepository(_context, _mapper);
-                return patientRepository;
+                try
+                {
+                    _context.SaveChanges();
+                    dbContextTransaction.Commit();
+                }
+                catch (Exception)
+                {
+                    //Log Exception Handling message                      
+                    returnValue = false;
+                    dbContextTransaction.Rollback();
+                }
             }
+
+            return returnValue;
+            //_context.SaveChanges();
         }
 
-        public DoctorRepository Doctors
-        {
-            get
-            {
-                if (doctorRepository == null)
-                    doctorRepository = new DoctorRepository(_context, _mapper);
-                return doctorRepository;
-            }
-        }
-        public PatientCardRepository PatietnCard
-        {
-            get
-            {
-                if (patientCardRepository == null)
-                    patientCardRepository = new PatientCardRepository(_context, _mapper);
-                return patientCardRepository;
-            }
-        }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
 
         private bool disposed = false;
 

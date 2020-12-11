@@ -20,6 +20,6 @@ namespace SimbirsoftDbRep.Models.Responses.Doctor
         /// <summary>
         /// Телефонный номер доктора.
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
     }
 }
