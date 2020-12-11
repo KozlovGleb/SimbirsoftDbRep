@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SimbirsoftDbRep.Common.Swagger;
 using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Database.Domain;
+using SimbirsoftDbRep.Models.DTO;
+using SimbirsoftDbRep.Models.Requests.PatientCard;
+using SimbirsoftDbRep.Models.Responses.PatientCard;
+using SimbirsoftDbRep.UoW;
 
 namespace SimbirsoftDbRep.Controllers
 {
@@ -16,97 +23,93 @@ namespace SimbirsoftDbRep.Controllers
     [ApiExplorerSettings(GroupName = SwaggerDocParts.Cards)]
     public class PatientCardsController : ControllerBase
     {
-        private readonly HospitalContext _context;
+        private readonly ILogger<PatientCardsController> _logger;
+        private readonly IMapper _mapper;
+        UnitOfWork unitOfWork;
 
-        public PatientCardsController(HospitalContext context)
+        /// <summary>
+        /// Инициализирует экземпляр <see cref="PatientsController"/>
+        /// </summary>
+        /// <param name="patientService">Сервис.</param>
+        /// <param name="logger">Логгер.</param>
+        /// <param name="mapper">Маппер.</param>
+        public PatientCardsController(ILogger<PatientCardsController> logger, IMapper mapper, HospitalContext context)
         {
-            _context = context;
+            _logger = logger;
+            _mapper = mapper;
+            unitOfWork = new UnitOfWork(context, mapper);
         }
 
-        // GET: api/PatientCards
+        /// <summary>
+        /// Получение перечня пациентов.
+        /// </summary>
+        /// <returns>Коллекция сущностей "Пациент".</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PatientCard>>> GetPatientCards()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PatientCardResponse>))]
+        public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
-            return await _context.PatientCards.ToListAsync();
+            _logger.LogInformation("Patients/Get was requested.");
+            var response = await unitOfWork.PatientCards.GetAsync(cancellationToken);
+            unitOfWork.Save();
+            return Ok(_mapper.Map<IEnumerable<PatientCardResponse>>(response));
         }
 
-        // GET: api/PatientCards/5
+        /// <summary>
+        /// Получение пациента по Id.
+        /// </summary>
+        /// <returns>Cущность "Пациент".</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<PatientCard>> GetPatientCard(long id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientCardResponse))]
+        public async Task<IActionResult> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
-            var patientCard = await _context.PatientCards.FindAsync(id);
-
-            if (patientCard == null)
-            {
-                return NotFound();
-            }
-
-            return patientCard;
+            _logger.LogInformation("Patients/GetById was requested.");
+            //var response = await _patientService.GetAsync(id, cancellationToken);
+            var response = await unitOfWork.PatientCards.GetAsync(id);
+            unitOfWork.Save();
+            return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
-        // PUT: api/PatientCards/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPatientCard(long id, PatientCard patientCard)
-        {
-            if (id != patientCard.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(patientCard).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientCardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/PatientCards
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Добавление сущности "Пациент".
+        /// </summary>
+        /// <returns>Cущность "Пациент".</returns>
         [HttpPost]
-        public async Task<ActionResult<PatientCard>> PostPatientCard(PatientCard patientCard)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientCardResponse))]
+        public async Task<IActionResult> PostAsync(CreatePatientCardRequest request, CancellationToken cancellationToken)
         {
-            _context.PatientCards.Add(patientCard);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPatientCard", new { id = patientCard.Id }, patientCard);
+            _logger.LogInformation("Patients/Post was requested.");
+            var response = await unitOfWork.PatientCards.CreateAsync(_mapper.Map<PatientCardDto>(request));
+            unitOfWork.Save();
+            return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
-        // DELETE: api/PatientCards/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PatientCard>> DeletePatientCard(long id)
+        /// <summary>
+        /// Изменение сущности "Пациент".
+        /// </summary>
+        /// <returns>Cущность "Пациент".</returns>
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientCardResponse))]
+        public async Task<IActionResult> PutAsync(UpdatePatientCardRequest request, CancellationToken cancellationToken)
         {
-            var patientCard = await _context.PatientCards.FindAsync(id);
-            if (patientCard == null)
-            {
-                return NotFound();
-            }
-
-            _context.PatientCards.Remove(patientCard);
-            await _context.SaveChangesAsync();
-
-            return patientCard;
+            _logger.LogInformation("Patients/Put was requested.");
+            
+            var response = await unitOfWork.PatientCards.UpdateAsync(_mapper.Map<PatientCardDto>(request));
+            unitOfWork.Save();
+            return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
-        private bool PatientCardExists(long id)
+        /// <summary>
+        /// Удаление сущностей "Пациент".
+        /// </summary>
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> DeleteAsync(CancellationToken cancellationToken, params long[] ids)
         {
-            return _context.PatientCards.Any(e => e.Id == id);
+            _logger.LogInformation("Patients/Delete was requested.");
+            //await _patientService.DeleteAsync(ids);
+            await unitOfWork.PatientCards.DeleteAsync(ids);
+            unitOfWork.Save();
+            return NoContent();
         }
     }
 }

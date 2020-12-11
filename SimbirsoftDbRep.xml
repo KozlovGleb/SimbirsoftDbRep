@@ -1,0 +1,775 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimbirsoftDbRep</name>
+    </assembly>
+    <members>
+        <member name="T:SimbirsoftDbRep.Startup">
+            <summary>
+            Конфигурация приложения.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:SimbirsoftDbRep.Startup"/>.
+            </summary>
+            <param name="configuration">Конфигурация.</param>
+        </member>
+        <member name="P:SimbirsoftDbRep.Startup.Configuration">
+            <summary>
+            Конфигурация.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SimbirsoftDbRep.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)" -->
+        <member name="T:SimbirsoftDbRep.Common.Swagger.SwaggerConfiguration">
+            <summary>
+            Расширения для конфигурации Swagger.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Common.Swagger.SwaggerConfiguration.ConfigureSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Настройка документов Swagger.
+            </summary>
+            <param name="services">Коллекция сервисов для DI.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Common.Swagger.SwaggerDocParts">
+            <summary>
+            Константы для указания частей API в Swagger.
+            </summary>
+        </member>
+        <member name="F:SimbirsoftDbRep.Common.Swagger.SwaggerDocParts.Patients">
+            <summary>
+            Константа для swagger-документа "Пациент".
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.#ctor(Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Controllers.PatientsController},AutoMapper.IMapper,SimbirsoftDbRep.Database.Context.HospitalContext)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.PatientsController"/>
+            </summary>
+            <param name="patientService">Сервис.</param>
+            <param name="logger">Логгер.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получение перечня пациентов.
+            </summary>
+            <returns>Коллекция сущностей "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.GetByIdAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Получение пациента по Id.
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.PostAsync(SimbirsoftDbRep.Models.Requests.Doctor.CreateDoctorRequest,System.Threading.CancellationToken)">
+            <summary>
+            Добавление сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.PutAsync(SimbirsoftDbRep.Models.Requests.Doctor.UpdateDoctorRequest,System.Threading.CancellationToken)">
+            <summary>
+            Изменение сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.DeleteAsync(System.Threading.CancellationToken,System.Int64[])">
+            <summary>
+            Удаление сущностей "Пациент".
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.Mapping.DoctorProfile.#ctor">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.Mapping.DoctorProfile"/>.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.Mapping.PatientCardProfile.#ctor">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.Mapping.PatientProfile"/>.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Controllers.Mapping.PatientProfile">
+            <summary>
+            Маппинг для запросов и ответов контроллера сущности "Пациент".
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.Mapping.PatientProfile.#ctor">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.Mapping.PatientProfile"/>.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.#ctor(Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Controllers.PatientCardsController},AutoMapper.IMapper,SimbirsoftDbRep.Database.Context.HospitalContext)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.PatientsController"/>
+            </summary>
+            <param name="patientService">Сервис.</param>
+            <param name="logger">Логгер.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получение перечня пациентов.
+            </summary>
+            <returns>Коллекция сущностей "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.GetByIdAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Получение пациента по Id.
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.PostAsync(SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest,System.Threading.CancellationToken)">
+            <summary>
+            Добавление сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.PutAsync(SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest,System.Threading.CancellationToken)">
+            <summary>
+            Изменение сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientCardsController.DeleteAsync(System.Threading.CancellationToken,System.Int64[])">
+            <summary>
+            Удаление сущностей "Пациент".
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Controllers.PatientsController">
+            <summary>
+            Контроллер для работы с данными о пациентах.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.#ctor(SimbirsoftDbRep.Services.IPatientService,Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Controllers.PatientsController},AutoMapper.IMapper,SimbirsoftDbRep.Database.Context.HospitalContext)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Controllers.PatientsController"/>
+            </summary>
+            <param name="patientService">Сервис.</param>
+            <param name="logger">Логгер.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получение перечня пациентов.
+            </summary>
+            <returns>Коллекция сущностей "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.GetByIdAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Получение пациента по Id.
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.PostAsync(SimbirsoftDbRep.Models.Requests.CreatePatientRequest,System.Threading.CancellationToken)">
+            <summary>
+            Добавление сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.PutAsync(SimbirsoftDbRep.Models.Requests.UpdatePatientRequest,System.Threading.CancellationToken)">
+            <summary>
+            Изменение сущности "Пациент".
+            </summary>
+            <returns>Cущность "Пациент".</returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.PatientsController.DeleteAsync(System.Threading.CancellationToken,System.Int64[])">
+            <summary>
+            Удаление сущностей "Пациент".
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations">
+            <summary>
+            Конфигурации БД.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations.ConfigureDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Подключение DbContext.
+            </summary>
+            <param name="services">Коллекция сервисов.</param>
+            <param name="configuration">Конфигурация.</param>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Patients">
+            <summary>
+            Пациенты.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Doctors">
+            <summary>
+            Доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.PatientCards">
+            <summary>
+            Карты пациентов.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Database.Context.HospitalContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Database.Context.HospitalContext"/>.
+            </summary>
+            <param name="options">Опции для конфигурации контекста.</param>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntity.Id">
+            <summary>
+            Идентификатор записи.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2">
+            <summary>
+            Базовый класс для слабых сущностей.
+            </summary>
+            <typeparam name="TEntity1">Связанная сущность - 1.</typeparam>
+            <typeparam name="TEntity2">Связанная сущность - 2.</typeparam>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1Id">
+            <summary>
+            Идентификатор первой связанной сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1">
+            <summary>
+            Связанная сущность - 1.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2Id">
+            <summary>
+            Идентификатор второй связанной сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2">
+            <summary>
+            Связанная сущность - 2.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Phone">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.PhoneNumber">
+            <summary>
+            Телефонный номер.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DoctorId">
+            <summary>
+            ID доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.PatientId">
+            <summary>
+            ID пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.BaseDto.Id">
+            <summary>
+            Идентификатор записи.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.DoctorDTO.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.DoctorDTO.Phone">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.PatientCardDto.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.PatientCardDto.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Models.DTO.PatientDTO">
+            <summary>
+            DTO для <see cref="!:Patient"/>
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.PatientDTO.Name">
+            <summary>
+            Имя пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.DTO.PatientDTO.PhoneNumber">
+            <summary>
+            Телефонный номер пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.CreateDoctorRequest.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.CreateDoctorRequest.Phone">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.UpdateDoctorRequest.Id">
+            <summary>
+            Идентификатор сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.UpdateDoctorRequest.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.UpdateDoctorRequest.Phone">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest.DoctorId">
+            <summary>
+            ID доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest.PatientId">
+            <summary>
+            ID пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest.Id">
+            <summary>
+            Идентификатор сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest.DoctorId">
+            <summary>
+            ID доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.UpdatePatientCardRequest.PatientId">
+            <summary>
+            ID пациента.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Models.Requests.CreatePatientRequest">
+            <summary>
+            Запрос на создание нового пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.CreatePatientRequest.Name">
+            <summary>
+            Имя пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.CreatePatientRequest.PhoneNumber">
+            <summary>
+            Номер телефона пациента.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Models.Requests.UpdatePatientRequest">
+            <summary>
+            Запрос на изменение пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.UpdatePatientRequest.Id">
+            <summary>
+            Идентификатор сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.UpdatePatientRequest.Name">
+            <summary>
+            Имя пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.UpdatePatientRequest.PhoneNumber">
+            <summary>
+            Номер телефона пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Doctor.DoctorResponce.Id">
+            <summary>
+            Идентификатор записи.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Doctor.DoctorResponce.Name">
+            <summary>
+            Имя доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Doctor.DoctorResponce.Phone">
+            <summary>
+            Телефонный номер доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.PatientCard.PatientCardResponse.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.PatientCard.PatientCardResponse.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.PatientCard.PatientCardResponse.DoctorId">
+            <summary>
+            ID доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.PatientCard.PatientCardResponse.PatientId">
+            <summary>
+            ID пациента.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Models.Responses.Patient.PatientResponse">
+            <summary>
+            Ответ на запросы для пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Patient.PatientResponse.Id">
+            <summary>
+            Идентификатор записи.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Patient.PatientResponse.Name">
+            <summary>
+            Имя пациента.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Responses.Patient.PatientResponse.PhoneNumber">
+            <summary>
+            Телефонный номер пациента.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.BaseRepository`2">
+            <summary>
+            Базовый класс репозитория для работы с CRUD.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Доменная модель.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.#ctor(SimbirsoftDbRep.Database.Context.HospitalContext,AutoMapper.IMapper)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Repositories.BaseRepository`2"/>.
+            </summary>
+            <param name="context">Контекст данных.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.CreateAsync(`0)">
+            <inheritdoc cref="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.ICreatable`2.CreateAsync(`0)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.DeleteAsync(System.Int64[])">
+            <inheritdoc cref="!:IDeletable&lt;TDto, TModel&gt;.DeleteAsync(long[])"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.GetAsync(System.Int64)">
+            <inheritdoc cref="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettableById`2.GetAsync(System.Int64)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.UpdateAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IUpdatable`2.UpdateAsync(`0,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.GetAsync(System.Threading.CancellationToken)">
+            <inheritdoc cref="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettable`2.GetAsync(System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.BaseRepository`2.DefaultIncludeProperties(Microsoft.EntityFrameworkCore.DbSet{`1})">
+            <summary>
+            Добавляет к выборке связанные параметры.
+            </summary>
+            <param name="dbSet">Коллекция DbSet репозитория.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Bootstrap.RepositoriesConfiguration">
+            <summary>
+            Расширения для конфигурации репозиториев.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Bootstrap.RepositoriesConfiguration.ConfigureRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Конфигурирование репозиториев.
+            </summary>
+            <param name="services">Коллекция сервисов из Startup.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.DoctorRepository.#ctor(SimbirsoftDbRep.Database.Context.HospitalContext,AutoMapper.IMapper)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Repositories.PatientRepository"/>.
+            </summary>
+            <param name="context">Контекст данных.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.ICreatable`2">
+            <summary>
+            Интерфейс для создания сущности.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.ICreatable`2.CreateAsync(`0)">
+            <summary>
+            Создание сущности.
+            </summary>
+            <param name="dto">DTO.</param>
+            <returns>Идентификатор созданной сущности.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.ICrudRepository`2">
+            <summary>
+            Интерфейс репозитория с базовыми CRUD-операциями.
+            </summary>
+            <typeparam name="TDto"></typeparam>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IDeletable">
+            <summary>
+            Интерфейс для удаления сущностей.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IDeletable.DeleteAsync(System.Int64[])">
+            <summary>
+            Групповое удаление сущностей.
+            </summary>
+            <param name="ids">Идентификаторы.</param>
+            <returns>Задача, представляющая асинхронную операцию.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettable`2">
+            <summary>
+            Интерфейс для получения сущностей.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettable`2.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получение сущностей.
+            </summary>
+            <param name="token">Экземпляр <see cref="T:System.Threading.CancellationToken"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettableById`2">
+            <summary>
+            Интерфейс для получения сущности по идентификатору.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IGettableById`2.GetAsync(System.Int64)">
+            <summary>
+            Получение сущности по идентификатору.
+            </summary>
+            <param name="id">Идентификатор.</param>
+            <returns>Экземпляр сущности.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IUpdatable`2">
+            <summary>
+            Интерфейс для изменения сущности.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Interfaces.CRUD.IUpdatable`2.UpdateAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Изменение сущности.
+            </summary>
+            <param name="dto">DTO.</param>
+            <param name="token">Экземпляр <see cref="T:System.Threading.CancellationToken"/>.</param>
+            <returns>Обновленная сущность.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.IDoctorRepository">
+            <summary>
+            Интерфейс репозитория для работы с сущностями "Доктор"
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.IPatientCardRepository">
+            <summary>
+            Интерфейс репозитория для работы с сущностями "Карта пациента".
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Interfaces.IPatientRepositoty">
+            <summary>
+            Интерфейс репозитория для работы с сущностями "Пациент".
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.Mapping.PatientProfile">
+            <summary>
+            Профиль маппинга (пациент).
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.Mapping.PatientProfile.#ctor">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Repositories.Mapping.PatientProfile"/>
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.PatientCardRepository.#ctor(SimbirsoftDbRep.Database.Context.HospitalContext,AutoMapper.IMapper)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Repositories.PatientRepository"/>.
+            </summary>
+            <param name="context">Контекст данных.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Repositories.PatientRepository">
+            <summary>
+            Репозиторий для работы с сущностями "Пациент".
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Repositories.PatientRepository.#ctor(SimbirsoftDbRep.Database.Context.HospitalContext,AutoMapper.IMapper)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Repositories.PatientRepository"/>.
+            </summary>
+            <param name="context">Контекст данных.</param>
+            <param name="mapper">Маппер.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.Bootstrap.ServicesConfiguration">
+            <summary>
+            Методы засширения для конфигурации сервисов.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.Bootstrap.ServicesConfiguration.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Конфигурация сервисов.
+            </summary>
+            <param name="services">Коллекция сервисов из Startup.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.CRUD.ICreatable`1">
+            <summary>
+            Интерфейс сервиса для создания сущности.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.CRUD.ICreatable`1.CreateAsync(`0)">
+            <summary>
+            Создание сущности.
+            </summary>
+            <param name="dto">DTO.</param>
+            <returns>Идентификатор созданной сущности.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.CRUD.IDeletable">
+            <summary>
+            Интерфейс сервиса для удаления сущностей.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.CRUD.IDeletable.DeleteAsync(System.Int64[])">
+            <summary>
+            Групповое удаление сущностей.
+            </summary>
+            <param name="ids">Идентификаторы.</param>
+            <returns>Задача, представляющая асинхронную операцию.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.CRUD.IGettable`1">
+            <summary>
+            Интерфейс сервиса для получения сущностей.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.CRUD.IGettable`1.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получение сущностей.
+            </summary>
+            <param name="token">Экземпляр <see cref="T:System.Threading.CancellationToken"/>.</param>
+            <returns>Сущности.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.CRUD.IGettableById`1">
+            <summary>
+            Интерфейс сервиса для получения сущности по идентификатору.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.CRUD.IGettableById`1.GetAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Получение сущности по идентификатору.
+            </summary>
+            <param name="id">Идентификатор.</param>
+            <returns>Экземпляр сущности.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.CRUD.IUpdatable`1">
+            <summary>
+            Интерфейс сервиса для изменения сущности.
+            </summary>
+            <typeparam name="TDto">DTO.</typeparam>
+            <typeparam name="TModel">Domain model.</typeparam>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.CRUD.IUpdatable`1.UpdateAsync(`0)">
+            <summary>
+            Изменение сущности.
+            </summary>
+            <param name="dto">DTO.</param>
+            <param name="token">Экземпляр <see cref="!:CancellationToken"/>.</param>
+            <returns>Обновленная сущность.</returns>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.IPatientService">
+            <summary>
+            Интерфейс сервиса для работы с данными о пациенте.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Services.PatientService">
+            <summary>
+            Сервис для работы с данными о пациенте.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.#ctor(SimbirsoftDbRep.Repositories.Interfaces.IPatientRepositoty)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Services.PatientService"/>.
+            </summary>
+            <param name="repository">Репозиторий.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.CreateAsync(SimbirsoftDbRep.Models.DTO.PatientDTO)">
+            <inheritdoc cref="!:ICreatable&lt;TDto&gt;.CreateAsync(TDto)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.DeleteAsync(System.Int64[])">
+            <inheritdoc cref="!:IDeletable.DeleteAsync(long[])"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.GetAsync(System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc cref="!:IGettableById&lt;TDto&gt;.GetAsync(long, CancellationToken)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.GetAsync(System.Threading.CancellationToken)">
+            <inheritdoc cref="!:IGettable&lt;TDto&gt;.GetAsync(CancellationToken)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.PatientService.UpdateAsync(SimbirsoftDbRep.Models.DTO.PatientDTO)">
+            <inheritdoc cref="!:IUpdatable&lt;TDto&gt;.UpdateAsync(TDto)"/>
+        </member>
+    </members>
+</doc>

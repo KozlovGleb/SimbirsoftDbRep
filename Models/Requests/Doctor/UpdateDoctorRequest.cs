@@ -4,12 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimbirsoftDbRep.Models.Requests
+namespace SimbirsoftDbRep.Models.Requests.Doctor
 {
-    /// <summary>
-    /// Запрос на изменение пациента.
-    /// </summary>
-    public class UpdatePatientRequest:CreatePatientRequest
+    public class UpdateDoctorRequest
     {
         /// <summary>
         /// Идентификатор сущности.
@@ -17,15 +14,17 @@ namespace SimbirsoftDbRep.Models.Requests
         [Required]
         public long Id { get; set; }
         /// <summary>
-        /// Имя пациента.
+        /// Имя.
         /// </summary>
+        [StringLength(250)]
         [Required]
         public string Name { get; set; }
 
         /// <summary>
-        /// Номер телефона пациента.
+        /// Телефон.
         /// </summary>
-        [MaxLength(2000)]
-        public string PhoneNumber { get; set; }
+        [StringLength(25)]
+        [Required]
+        public string Phone { get; set; }
     }
 }

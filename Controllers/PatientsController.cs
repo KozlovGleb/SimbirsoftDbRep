@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SimbirsoftDbRep.Common.Swagger;
+using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Models.DTO;
 using SimbirsoftDbRep.Models.Requests;
 using SimbirsoftDbRep.Models.Responses.Patient;
 using SimbirsoftDbRep.Services;
+using SimbirsoftDbRep.UoW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,7 @@ namespace SimbirsoftDbRep.Controllers
         private readonly ILogger<PatientsController> _logger;
         private readonly IPatientService _patientService;
         private readonly IMapper _mapper;
+        UnitOfWork unitOfWork;
 
         /// <summary>
         /// Инициализирует экземпляр <see cref="PatientsController"/>
@@ -33,11 +36,12 @@ namespace SimbirsoftDbRep.Controllers
         /// <param name="patientService">Сервис.</param>
         /// <param name="logger">Логгер.</param>
         /// <param name="mapper">Маппер.</param>
-        public PatientsController(IPatientService patientService, ILogger<PatientsController> logger, IMapper mapper)
+        public PatientsController(IPatientService patientService, ILogger<PatientsController> logger, IMapper mapper,HospitalContext context)
         {
             _patientService = patientService;
             _logger = logger;
             _mapper = mapper;
+            unitOfWork = new UnitOfWork(context,mapper);
         }
 
         /// <summary>
@@ -49,7 +53,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Get was requested.");
-            var response = await _patientService.GetAsync(cancellationToken);
+            var response = await unitOfWork.Patients.GetAsync(cancellationToken);
+            unitOfWork.Save();
             return Ok(_mapper.Map<IEnumerable<PatientResponse>>(response));
         }
 
@@ -62,7 +67,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/GetById was requested.");
-            var response = await _patientService.GetAsync(id, cancellationToken);
+            var response = await unitOfWork.Patients.GetAsync(id);
+            unitOfWork.Save();
             return Ok(_mapper.Map<PatientResponse>(response));
         }
 
@@ -75,8 +81,15 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PostAsync(CreatePatientRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Post was requested.");
-            var response = await _patientService.CreateAsync(_mapper.Map<PatientDTO>(request));
-            return Ok(_mapper.Map<PatientResponse>(response));
+         
+            
+               var response = await unitOfWork.Patients.CreateAsync(_mapper.Map<PatientDTO>(request));
+                unitOfWork.Save();
+                return Ok(_mapper.Map<PatientResponse>(response));
+                    
+           
+             
+            
         }
 
         /// <summary>
@@ -88,7 +101,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PutAsync(UpdatePatientRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Put was requested.");
-            var response = await _patientService.UpdateAsync(_mapper.Map<PatientDTO>(request));
+            var response = await unitOfWork.Patients.UpdateAsync(_mapper.Map<PatientDTO>(request));
+            unitOfWork.Save();
             return Ok(_mapper.Map<PatientResponse>(response));
         }
 
@@ -100,8 +114,10 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> DeleteAsync(CancellationToken cancellationToken, params long[] ids)
         {
             _logger.LogInformation("Patients/Delete was requested.");
-            await _patientService.DeleteAsync(ids);
+            await unitOfWork.Patients.DeleteAsync(ids);
+            unitOfWork.Save();
             return NoContent();
         }
+       
     }
 }
