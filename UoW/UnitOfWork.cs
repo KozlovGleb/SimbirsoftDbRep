@@ -37,10 +37,11 @@ namespace SimbirsoftDbRep.UoW
                     _context.SaveChanges();
                     dbContextTransaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     //Log Exception Handling message                      
                     returnValue = false;
+                    
                     dbContextTransaction.Rollback();
                 }
             }
@@ -53,7 +54,7 @@ namespace SimbirsoftDbRep.UoW
 
         private bool disposed = false;
 
-        public virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {

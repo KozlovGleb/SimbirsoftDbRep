@@ -49,8 +49,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Get was requested.");
-            //var response = await _patientService.GetAsync(cancellationToken);
             var response = await unitOfWork.PatientCards.GetAsync(cancellationToken);
+            unitOfWork.Save();
             return Ok(_mapper.Map<IEnumerable<PatientCardResponse>>(response));
         }
 
@@ -65,6 +65,7 @@ namespace SimbirsoftDbRep.Controllers
             _logger.LogInformation("Patients/GetById was requested.");
             //var response = await _patientService.GetAsync(id, cancellationToken);
             var response = await unitOfWork.PatientCards.GetAsync(id);
+            unitOfWork.Save();
             return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
@@ -77,8 +78,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PostAsync(CreatePatientCardRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Post was requested.");
-            // var response = await _patientService.CreateAsync(_mapper.Map<PatientDTO>(request));
             var response = await unitOfWork.PatientCards.CreateAsync(_mapper.Map<PatientCardDto>(request));
+            unitOfWork.Save();
             return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
@@ -91,8 +92,9 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PutAsync(UpdatePatientCardRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Put was requested.");
-            //var response = await _patientService.UpdateAsync(_mapper.Map<PatientDTO>(request));
+            
             var response = await unitOfWork.PatientCards.UpdateAsync(_mapper.Map<PatientCardDto>(request));
+            unitOfWork.Save();
             return Ok(_mapper.Map<PatientCardResponse>(response));
         }
 
@@ -106,6 +108,7 @@ namespace SimbirsoftDbRep.Controllers
             _logger.LogInformation("Patients/Delete was requested.");
             //await _patientService.DeleteAsync(ids);
             await unitOfWork.PatientCards.DeleteAsync(ids);
+            unitOfWork.Save();
             return NoContent();
         }
     }

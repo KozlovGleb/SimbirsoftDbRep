@@ -23,9 +23,10 @@ namespace SimbirsoftDbRep.Models.DTO
         [Required]
         public string DateOfVisit { get; set; }
 
+        public Doctor Doctor { get; set; }
         public long DoctorId { get; set; }
 
-  
+        public Patient Patient { get; set; }
         public long PatientId { get; set; }
     }
 }

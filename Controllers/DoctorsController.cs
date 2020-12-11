@@ -49,8 +49,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Get was requested.");
-            //var response = await _patientService.GetAsync(cancellationToken);
             var response = await unitOfWork.Doctors.GetAsync(cancellationToken);
+            unitOfWork.Save();
             return Ok(_mapper.Map<IEnumerable<DoctorResponce>>(response));
         }
 
@@ -63,8 +63,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/GetById was requested.");
-            //var response = await _patientService.GetAsync(id, cancellationToken);
             var response = await unitOfWork.Doctors.GetAsync(id);
+            unitOfWork.Save();
             return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
@@ -77,8 +77,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PostAsync(CreateDoctorRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Post was requested.");
-            // var response = await _patientService.CreateAsync(_mapper.Map<PatientDTO>(request));
             var response = await unitOfWork.Doctors.CreateAsync(_mapper.Map<DoctorDTO>(request));
+            unitOfWork.Save();
             return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
@@ -91,8 +91,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> PutAsync(UpdateDoctorRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Put was requested.");
-            //var response = await _patientService.UpdateAsync(_mapper.Map<PatientDTO>(request));
             var response = await unitOfWork.Doctors.UpdateAsync(_mapper.Map<DoctorDTO>(request));
+            unitOfWork.Save();
             return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
@@ -104,8 +104,8 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> DeleteAsync(CancellationToken cancellationToken, params long[] ids)
         {
             _logger.LogInformation("Patients/Delete was requested.");
-            //await _patientService.DeleteAsync(ids);
-            await unitOfWork.Patients.DeleteAsync(ids);
+            await unitOfWork.Doctors.DeleteAsync(ids);
+            unitOfWork.Save();
             return NoContent();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Database.Domain;
 using SimbirsoftDbRep.Models.DTO;
@@ -19,6 +20,11 @@ namespace SimbirsoftDbRep.Repositories
         /// <param name="mapper">Маппер.</param>
         public PatientCardRepository(HospitalContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+        protected override IQueryable<PatientCard> DefaultIncludeProperties(DbSet<PatientCard> dbSet)
+        {
+            return dbSet.Include(x => x.Patient)
+                .Include(x=>x.Doctor);
         }
     }
 }

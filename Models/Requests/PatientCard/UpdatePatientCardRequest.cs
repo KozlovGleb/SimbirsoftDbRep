@@ -27,13 +27,13 @@ namespace SimbirsoftDbRep.Models.Requests.PatientCard
         [Required]
         public string DateOfVisit { get; set; }
 
-        //public Database.Domain.Doctor Doctor { get; set; }
+        public Database.Domain.Doctor Doctor { get; set; }
 
         /// <summary>
         /// ID доктора.
         /// </summary>
         public long DoctorId { get; set; }
-        //public Database.Domain.Patient Patient { get; set; }
+        public Database.Domain.Patient Patient { get; set; }
 
         /// <summary>
         /// ID пациента.
