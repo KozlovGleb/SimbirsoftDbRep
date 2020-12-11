@@ -26,10 +26,21 @@ namespace SimbirsoftDbRep.Common.Swagger
             })
             .AddSwaggerDocument(c =>
             {
-                c.Title = "Version 2";
-                c.DocumentName = "v2";
-                c.ApiGroupNames = new[] { "v2" };
+                c.Title = "Doctors";
+                c.DocumentName = SwaggerDocParts.Doctors;
+                c.ApiGroupNames = new[] { SwaggerDocParts.Doctors };
+                c.GenerateXmlObjects = true;
+            })
+            .AddSwaggerDocument(c =>
+            {
+                c.Title = "Cards";
+                c.DocumentName = SwaggerDocParts.Cards;
+                c.ApiGroupNames = new[] { SwaggerDocParts.Cards };
+                c.GenerateXmlObjects = true;
             });
+
+
+
         }
     }
 }

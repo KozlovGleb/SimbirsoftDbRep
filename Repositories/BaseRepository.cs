@@ -41,7 +41,6 @@ namespace SimbirsoftDbRep.Repositories
         {
             var entity = _mapper.Map<TModel>(dto);
             await DbSet.AddAsync(entity);
-            await _сontext.SaveChangesAsync();
             return await GetAsync(entity.Id);
         }
 
@@ -53,13 +52,13 @@ namespace SimbirsoftDbRep.Repositories
                                 .ToListAsync();
 
             _сontext.RemoveRange(entities);
-            await _сontext.SaveChangesAsync();
+ 
         }
 
         /// <inheritdoc cref="IGettableById{TDto, TModel}.GetAsync(long)"/>
         public async Task<TDto> GetAsync(long id)
         {
-            var entity = await DbSet
+            var entity = await   DefaultIncludeProperties(DbSet)
                               .AsNoTracking()
                               .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -73,20 +72,25 @@ namespace SimbirsoftDbRep.Repositories
         {
             var entity = _mapper.Map<TModel>(dto);
             _сontext.Update(entity);
-            await _сontext.SaveChangesAsync(token);
-            var newEntity = await GetAsync(entity.Id);
 
-            return _mapper.Map<TDto>(newEntity);
+            return _mapper.Map<TDto>(entity);
         }
 
         /// <inheritdoc cref="IGettable{TDto, TModel}.GetAsync(CancellationToken)"/>
         public async Task<IEnumerable<TDto>> GetAsync(CancellationToken token = default)
         {
-            var entities = await DbSet.AsNoTracking().ToListAsync();
+            var entities = await DefaultIncludeProperties(DbSet)
+                              .AsNoTracking().ToListAsync();
+                              
 
             var dtos = _mapper.Map<IEnumerable<TDto>>(entities);
 
             return dtos;
         }
+        /// <summary>
+        /// Добавляет к выборке связанные параметры.
+        /// </summary>
+        /// <param name="dbSet">Коллекция DbSet репозитория.</param>
+        protected virtual IQueryable<TModel> DefaultIncludeProperties(DbSet<TModel> dbSet) => dbSet;
     }
 }

@@ -14,5 +14,7 @@ namespace SimbirsoftDbRep.Common.Swagger
         /// Константа для swagger-документа "Пациент".
         /// </summary>
         public const string Patients = nameof(Patients);
+        public const string Doctors = nameof(Doctors);
+        public const string Cards = nameof(Cards);
     }
 }

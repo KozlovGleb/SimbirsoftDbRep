@@ -1,32 +1,29 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SimbirsoftDbRep.Common.Swagger;
-using SimbirsoftDbRep.Database.Context;
-using SimbirsoftDbRep.Models.DTO;
-using SimbirsoftDbRep.Models.Requests;
-using SimbirsoftDbRep.Models.Responses.Patient;
-using SimbirsoftDbRep.Services;
-using SimbirsoftDbRep.UoW;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using SimbirsoftDbRep.Common.Swagger;
+using SimbirsoftDbRep.Database.Context;
+using SimbirsoftDbRep.Database.Domain;
+using SimbirsoftDbRep.Models.DTO;
+using SimbirsoftDbRep.Models.Requests.Doctor;
+using SimbirsoftDbRep.Models.Responses.Doctor;
+using SimbirsoftDbRep.UoW;
 
 namespace SimbirsoftDbRep.Controllers
 {
-    /// <summary>
-    /// Контроллер для работы с данными о пациентах.
-    /// </summary>
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    [ApiExplorerSettings(GroupName = SwaggerDocParts.Patients)]
-    public class PatientsController : ControllerBase
+    [ApiExplorerSettings(GroupName = SwaggerDocParts.Doctors)]
+    public class DoctorsController : ControllerBase
     {
         private readonly ILogger<PatientsController> _logger;
-        private readonly IPatientService _patientService;
         private readonly IMapper _mapper;
         UnitOfWork unitOfWork;
 
@@ -36,12 +33,11 @@ namespace SimbirsoftDbRep.Controllers
         /// <param name="patientService">Сервис.</param>
         /// <param name="logger">Логгер.</param>
         /// <param name="mapper">Маппер.</param>
-        public PatientsController(IPatientService patientService, ILogger<PatientsController> logger, IMapper mapper,HospitalContext context)
+        public DoctorsController( ILogger<PatientsController> logger, IMapper mapper, HospitalContext context)
         {
-            _patientService = patientService;
             _logger = logger;
             _mapper = mapper;
-            unitOfWork = new UnitOfWork(context,mapper);
+            unitOfWork = new UnitOfWork(context, mapper);
         }
 
         /// <summary>
@@ -49,13 +45,13 @@ namespace SimbirsoftDbRep.Controllers
         /// </summary>
         /// <returns>Коллекция сущностей "Пациент".</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PatientResponse>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DoctorResponce>))]
         public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Get was requested.");
-            var response = await unitOfWork.Patients.GetAsync(cancellationToken);
+            var response = await unitOfWork.Doctors.GetAsync(cancellationToken);
             unitOfWork.Save();
-            return Ok(_mapper.Map<IEnumerable<PatientResponse>>(response));
+            return Ok(_mapper.Map<IEnumerable<DoctorResponce>>(response));
         }
 
         /// <summary>
@@ -63,13 +59,13 @@ namespace SimbirsoftDbRep.Controllers
         /// </summary>
         /// <returns>Cущность "Пациент".</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientResponse))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DoctorResponce))]
         public async Task<IActionResult> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/GetById was requested.");
-            var response = await unitOfWork.Patients.GetAsync(id);
+            var response = await unitOfWork.Doctors.GetAsync(id);
             unitOfWork.Save();
-            return Ok(_mapper.Map<PatientResponse>(response));
+            return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
         /// <summary>
@@ -77,19 +73,13 @@ namespace SimbirsoftDbRep.Controllers
         /// </summary>
         /// <returns>Cущность "Пациент".</returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientResponse))]
-        public async Task<IActionResult> PostAsync(CreatePatientRequest request, CancellationToken cancellationToken)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DoctorResponce))]
+        public async Task<IActionResult> PostAsync(CreateDoctorRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Post was requested.");
-         
-            
-               var response = await unitOfWork.Patients.CreateAsync(_mapper.Map<PatientDTO>(request));
-                unitOfWork.Save();
-                return Ok(_mapper.Map<PatientResponse>(response));
-                    
-           
-             
-            
+            var response = await unitOfWork.Doctors.CreateAsync(_mapper.Map<DoctorDTO>(request));
+            unitOfWork.Save();
+            return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
         /// <summary>
@@ -97,13 +87,13 @@ namespace SimbirsoftDbRep.Controllers
         /// </summary>
         /// <returns>Cущность "Пациент".</returns>
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PatientResponse))]
-        public async Task<IActionResult> PutAsync(UpdatePatientRequest request, CancellationToken cancellationToken)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DoctorResponce))]
+        public async Task<IActionResult> PutAsync(UpdateDoctorRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Patients/Put was requested.");
-            var response = await unitOfWork.Patients.UpdateAsync(_mapper.Map<PatientDTO>(request));
+            var response = await unitOfWork.Doctors.UpdateAsync(_mapper.Map<DoctorDTO>(request));
             unitOfWork.Save();
-            return Ok(_mapper.Map<PatientResponse>(response));
+            return Ok(_mapper.Map<DoctorResponce>(response));
         }
 
         /// <summary>
@@ -114,10 +104,9 @@ namespace SimbirsoftDbRep.Controllers
         public async Task<IActionResult> DeleteAsync(CancellationToken cancellationToken, params long[] ids)
         {
             _logger.LogInformation("Patients/Delete was requested.");
-            await unitOfWork.Patients.DeleteAsync(ids);
+            await unitOfWork.Doctors.DeleteAsync(ids);
             unitOfWork.Save();
             return NoContent();
         }
-       
     }
 }
