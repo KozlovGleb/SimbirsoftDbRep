@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SimbirsoftDbRep.Services.Interfaces.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SimbirsoftDbRep.Services.Bootstrap
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddTransient<IPatientService, PatientService>();
+            
         }
     }
 }

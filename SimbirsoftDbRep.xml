@@ -4,6 +4,354 @@
         <name>SimbirsoftDbRep</name>
     </assembly>
     <members>
+        <member name="T:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager">
+            <summary>
+            Interface for Auth Manager.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.UsersRefreshTokensReadOnlyDictionary">
+            <summary>
+            RT dict.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.GenerateTokens(System.String,System.Security.Claims.Claim[],System.DateTime)">
+            <summary>
+            Generate tokens.
+            </summary>
+            <param name="username">User names.</param>
+            <param name="claims">Claim's array.</param>
+            <param name="now">Now date.</param>
+            <returns><see cref="T:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthResult"/></returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.Refresh(System.String,System.String,System.DateTime)">
+            <summary>
+            Go refresh.
+            </summary>
+            <param name="refreshToken">RT.</param>
+            <param name="accessToken">AT.</param>
+            <param name="now">Now date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.RemoveExpiredRefreshTokens(System.DateTime)">
+            <summary>
+            Delete RT.
+            </summary>
+            <param name="now">Now date.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.RemoveRefreshTokenByUserName(System.String)">
+            <summary>
+            Refresh by user.
+            </summary>
+            <param name="userName">User name.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager.DecodeJwtToken(System.String)">
+            <summary>
+            Decode token.
+            </summary>
+            <param name="token">AT token.</param>
+        </member>
+        <member name="T:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager">
+            <summary>
+            Auth manager.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.#ctor(SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig)">
+            <summary>
+            Initialize object of <see cref="T:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager"/>
+            </summary>
+            <param name="jwtTokenConfig">Configuration <see cref="!:JwtTokenConfig"/></param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.RemoveExpiredRefreshTokens(System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.RemoveRefreshTokenByUserName(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.GenerateTokens(System.String,System.Security.Claims.Claim[],System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.Refresh(System.String,System.String,System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.DecodeJwtToken(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthManager.GenerateRefreshTokenString">
+            <inheritdoc />
+        </member>
+        <member name="T:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthResult">
+            <summary>
+            Tokens result.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthResult.AccessToken">
+            <summary>
+            AT.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtAuthResult.RefreshToken">
+            <summary>
+            RT.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Authentication.Insfrastructure.RefreshToken">
+            <summary>
+            RT model.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.RefreshToken.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.RefreshToken.TokenString">
+            <summary>
+            RT value.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.RefreshToken.ExpireAt">
+            <summary>
+            Expipe date.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig.Secret">
+            <summary>
+            Secret.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig.Issuer">
+            <summary>
+            Issuer.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig.Audience">
+            <summary>
+            Audience.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig.AccessTokenExpiration">
+            <summary>
+            AT time.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Insfrastructure.JwtConfig.RefreshTokenExpiration">
+            <summary>
+            RT time.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache.#ctor(SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager)">
+            <summary>
+            Initialize <see cref="T:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache"/>
+            </summary>
+            <param name="jwtAuthManager"><see cref="T:SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager"/></param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Remove old tokens.
+            </summary>
+            <param name="stoppingToken"><see cref="T:System.Threading.CancellationToken"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache.DoWork(System.Object)">
+            <summary>
+            Remove action.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Stop removing.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Authentication.Insfrastructure.JwtRefreshTokenCache.Dispose">
+            <summary>
+            Dispose timer.
+            </summary>
+        </member>
+        <member name="F:SimbirsoftDbRep.Authentication.Insfrastructure.UserRoles.Admin">
+            <summary>
+            Admin role.
+            </summary>
+        </member>
+        <member name="F:SimbirsoftDbRep.Authentication.Insfrastructure.UserRoles.Default">
+            <summary>
+            Default role.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Authentication.Models.Role">
+            <summary>
+            Role.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Models.Role.Id">
+            <summary>
+            Id.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Models.Role.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Authentication.Models.UserRoles">
+            <summary>
+            User roles.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Models.UserRoles.Id">
+            <summary>
+            Id.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Models.UserRoles.User">
+            <summary>
+            User.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Authentication.Models.UserRoles.Role">
+            <summary>
+            Role.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Database.Domain.User">
+            <summary>
+            Модель пользователя приложения
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.User.Id">
+            <summary>
+            Id.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.User.Login">
+            <summary>
+            Login.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.User.Password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntity.Id">
+            <summary>
+            Идентификатор записи.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2">
+            <summary>
+            Базовый класс для слабых сущностей.
+            </summary>
+            <typeparam name="TEntity1">Связанная сущность - 1.</typeparam>
+            <typeparam name="TEntity2">Связанная сущность - 2.</typeparam>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1Id">
+            <summary>
+            Идентификатор первой связанной сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1">
+            <summary>
+            Связанная сущность - 1.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2Id">
+            <summary>
+            Идентификатор второй связанной сущности.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2">
+            <summary>
+            Связанная сущность - 2.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Phone">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.PhoneNumber">
+            <summary>
+            Телефонный номер.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DiseaseName">
+            <summary>
+            Название болезни.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DateOfVisit">
+            <summary>
+            Дата визита.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DoctorId">
+            <summary>
+            ID доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.PatientId">
+            <summary>
+            ID пациента.
+            </summary>
+        </member>
+        <member name="T:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations">
+            <summary>
+            Конфигурации БД.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations.ConfigureDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Подключение DbContext.
+            </summary>
+            <param name="services">Коллекция сервисов.</param>
+            <param name="configuration">Конфигурация.</param>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Patients">
+            <summary>
+            Пациенты.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Doctors">
+            <summary>
+            Доктора.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.PatientCards">
+            <summary>
+            Карты пациентов.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Users">
+            <summary>
+            Users.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Roles">
+            <summary>
+            Roles.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.UserRoles">
+            <summary>
+            User roles.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Database.Context.HospitalContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Database.Context.HospitalContext"/>.
+            </summary>
+            <param name="options">Опции для конфигурации контекста.</param>
+        </member>
         <member name="T:SimbirsoftDbRep.Startup">
             <summary>
             Конфигурация приложения.
@@ -21,26 +369,38 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:SimbirsoftDbRep.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)" -->
-        <member name="T:SimbirsoftDbRep.Common.Swagger.SwaggerConfiguration">
+        <member name="M:SimbirsoftDbRep.Controllers.AccountController.#ctor(Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Controllers.AccountController},SimbirsoftDbRep.Services.Interfaces.Login.IUserService,SimbirsoftDbRep.Authentication.Insfrastructure.IJwtAuthManager)">
             <summary>
-            Расширения для конфигурации Swagger.
+            Initialize object of <see cref="T:SimbirsoftDbRep.Controllers.AccountController"/>
+            </summary>
+            <param name="logger">Logger.</param>
+            <param name="userService">Service.</param>
+            <param name="jwtAuthManager">Auth manager.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.AccountController.Login(SimbirsoftDbRep.Models.Requests.Login.LoginRequest)">
+            <summary>
+            LogIn endpoint.
+            </summary>
+            <param name="request">LogIn request <see cref="T:SimbirsoftDbRep.Models.Requests.Login.LoginRequest"/></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/></returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.AccountController.GetCurrentUser">
+            <summary>
+            Get current user enpoint
+            </summary>
+            <returns><see cref="T:SimbirsoftDbRep.Models.Responses.Login.LoginResult"/></returns>
+        </member>
+        <member name="M:SimbirsoftDbRep.Controllers.AccountController.Logout">
+            <summary>
+            Logout endpoint.
             </summary>
         </member>
-        <member name="M:SimbirsoftDbRep.Common.Swagger.SwaggerConfiguration.ConfigureSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:SimbirsoftDbRep.Controllers.AccountController.RefreshToken(SimbirsoftDbRep.Models.Requests.Login.RefreshTokenRequest)">
             <summary>
-            Настройка документов Swagger.
+            Endpoint for refresh.
             </summary>
-            <param name="services">Коллекция сервисов для DI.</param>
-        </member>
-        <member name="T:SimbirsoftDbRep.Common.Swagger.SwaggerDocParts">
-            <summary>
-            Константы для указания частей API в Swagger.
-            </summary>
-        </member>
-        <member name="F:SimbirsoftDbRep.Common.Swagger.SwaggerDocParts.Patients">
-            <summary>
-            Константа для swagger-документа "Пациент".
-            </summary>
+            <param name="request"><see cref="T:SimbirsoftDbRep.Models.Requests.Login.RefreshTokenRequest"/></param>
+            <returns><see cref="T:SimbirsoftDbRep.Models.Responses.Login.LoginResult"/></returns>
         </member>
         <member name="M:SimbirsoftDbRep.Controllers.DoctorsController.#ctor(Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Controllers.PatientsController},AutoMapper.IMapper,SimbirsoftDbRep.Database.Context.HospitalContext)">
             <summary>
@@ -178,111 +538,6 @@
             Удаление сущностей "Пациент".
             </summary>
         </member>
-        <member name="T:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations">
-            <summary>
-            Конфигурации БД.
-            </summary>
-        </member>
-        <member name="M:SimbirsoftDbRep.Database.Bootstrap.DbConfigurations.ConfigureDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            Подключение DbContext.
-            </summary>
-            <param name="services">Коллекция сервисов.</param>
-            <param name="configuration">Конфигурация.</param>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Patients">
-            <summary>
-            Пациенты.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.Doctors">
-            <summary>
-            Доктора.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Context.HospitalContext.PatientCards">
-            <summary>
-            Карты пациентов.
-            </summary>
-        </member>
-        <member name="M:SimbirsoftDbRep.Database.Context.HospitalContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
-            <summary>
-            Инициализирует экземпляр <see cref="T:SimbirsoftDbRep.Database.Context.HospitalContext"/>.
-            </summary>
-            <param name="options">Опции для конфигурации контекста.</param>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntity.Id">
-            <summary>
-            Идентификатор записи.
-            </summary>
-        </member>
-        <member name="T:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2">
-            <summary>
-            Базовый класс для слабых сущностей.
-            </summary>
-            <typeparam name="TEntity1">Связанная сущность - 1.</typeparam>
-            <typeparam name="TEntity2">Связанная сущность - 2.</typeparam>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1Id">
-            <summary>
-            Идентификатор первой связанной сущности.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity1">
-            <summary>
-            Связанная сущность - 1.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2Id">
-            <summary>
-            Идентификатор второй связанной сущности.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.BaseEntityWithLinks`2.Entity2">
-            <summary>
-            Связанная сущность - 2.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Name">
-            <summary>
-            Имя.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.Doctor.Phone">
-            <summary>
-            Телефон.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.Name">
-            <summary>
-            Имя.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.Patient.PhoneNumber">
-            <summary>
-            Телефонный номер.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DiseaseName">
-            <summary>
-            Название болезни.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DateOfVisit">
-            <summary>
-            Дата визита.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.DoctorId">
-            <summary>
-            ID доктора.
-            </summary>
-        </member>
-        <member name="P:SimbirsoftDbRep.Database.Domain.PatientCard.PatientId">
-            <summary>
-            ID пациента.
-            </summary>
-        </member>
         <member name="P:SimbirsoftDbRep.Models.DTO.BaseDto.Id">
             <summary>
             Идентификатор записи.
@@ -346,6 +601,16 @@
         <member name="P:SimbirsoftDbRep.Models.Requests.Doctor.UpdateDoctorRequest.Phone">
             <summary>
             Телефон.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Login.LoginRequest.UserName">
+            <summary>
+            Name of user.
+            </summary>
+        </member>
+        <member name="P:SimbirsoftDbRep.Models.Requests.Login.LoginRequest.Password">
+            <summary>
+            Password.
             </summary>
         </member>
         <member name="P:SimbirsoftDbRep.Models.Requests.PatientCard.CreatePatientCardRequest.DiseaseName">
@@ -745,6 +1010,21 @@
             Интерфейс сервиса для работы с данными о пациенте.
             </summary>
         </member>
+        <member name="M:SimbirsoftDbRep.Services.Interfaces.Login.IUserService.IsAnExistingUser(System.String)">
+            <summary>
+            Check user.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.Interfaces.Login.IUserService.IsValidUserCredentials(System.String,System.String)">
+            <summary>
+            Validate user data.
+            </summary>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.Interfaces.Login.IUserService.GetUserRole(System.String)">
+            <summary>
+            Get user role if exists.
+            </summary>
+        </member>
         <member name="T:SimbirsoftDbRep.Services.PatientService">
             <summary>
             Сервис для работы с данными о пациенте.
@@ -770,6 +1050,22 @@
         </member>
         <member name="M:SimbirsoftDbRep.Services.PatientService.UpdateAsync(SimbirsoftDbRep.Models.DTO.PatientDTO)">
             <inheritdoc cref="!:IUpdatable&lt;TDto&gt;.UpdateAsync(TDto)"/>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.UserService.#ctor(Microsoft.Extensions.Logging.ILogger{SimbirsoftDbRep.Services.UserService},SimbirsoftDbRep.Database.Context.HospitalContext)">
+            <summary>
+            Initialize <see cref="T:SimbirsoftDbRep.Services.UserService"/>
+            </summary>
+            <param name="logger">Logger.</param>
+            <param name="context">DB Context.</param>
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.UserService.IsValidUserCredentials(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.UserService.IsAnExistingUser(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimbirsoftDbRep.Services.UserService.GetUserRole(System.String)">
+            <inheritdoc />
         </member>
     </members>
 </doc>

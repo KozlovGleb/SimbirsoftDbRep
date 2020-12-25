@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SimbirsoftDbRep.Common.Swagger;
 using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Database.Domain;
 using SimbirsoftDbRep.Models.DTO;
@@ -18,9 +17,12 @@ using SimbirsoftDbRep.UoW;
 
 namespace SimbirsoftDbRep.Controllers
 {
+    /// <summary>
+    /// Контроллер для сущности "Карта пациента"
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = SwaggerDocParts.Cards)]
+ 
     public class PatientCardsController : ControllerBase
     {
         private readonly ILogger<PatientCardsController> _logger;
