@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SimbirsoftDbRep.Common.Swagger;
 using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Models.DTO;
 using SimbirsoftDbRep.Models.Requests;
@@ -22,7 +21,6 @@ namespace SimbirsoftDbRep.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [ApiExplorerSettings(GroupName = SwaggerDocParts.Patients)]
     public class PatientsController : ControllerBase
     {
         private readonly ILogger<PatientsController> _logger;

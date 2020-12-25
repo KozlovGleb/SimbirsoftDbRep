@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SimbirsoftDbRep.Common.Swagger;
 using SimbirsoftDbRep.Database.Context;
 using SimbirsoftDbRep.Database.Domain;
 using SimbirsoftDbRep.Models.DTO;
@@ -20,7 +20,7 @@ namespace SimbirsoftDbRep.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = SwaggerDocParts.Doctors)]
+    [Authorize]
     public class DoctorsController : ControllerBase
     {
         private readonly ILogger<PatientsController> _logger;
